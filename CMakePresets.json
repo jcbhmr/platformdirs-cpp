@@ -1,0 +1,72 @@
+{
+  "version": 8,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 29,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "binaryDir": "build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "release",
+      "inherits": ["default"],
+      "binaryDir": "build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "BUILD_TESTING": false
+      }
+    },
+    {
+      "name": "cosmocc",
+      "inherits": ["default"],
+      "toolchainFile": "cmake/cosmocc.cmake",
+      "binaryDir": "build/cosmocc"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default",
+      "configuration": "Debug"
+    },
+    {
+      "name": "release",
+      "configurePreset": "release",
+      "configuration": "Release"
+    },
+    {
+      "name": "cosmocc",
+      "configurePreset": "cosmocc",
+      "configuration": "Debug"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "default",
+      "steps": [
+        { "type": "configure", "name": "default" },
+        { "type": "build", "name": "default" }
+      ]
+    },
+    {
+      "name": "release",
+      "steps": [
+        { "type": "configure", "name": "release" },
+        { "type": "build", "name": "release" }
+      ]
+    },
+    {
+      "name": "cosmocc",
+      "steps": [
+        { "type": "configure", "name": "cosmocc" },
+        { "type": "build", "name": "cosmocc" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+{
+    "updateContentCommand": "./.devcontainer/setup.sh"
+}

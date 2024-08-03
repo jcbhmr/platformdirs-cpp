@@ -1,3 +1,6 @@
+build
+
+#region https://github.com/github/gitignore/blob/main/CMake.gitignore
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
@@ -10,3 +13,4 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
+#endregion
