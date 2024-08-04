@@ -12,11 +12,11 @@ namespace unix {
 class unix : public platformdirs::api::platform_dirs_abc {
 public:
 
-using platformdirs::api::platform_dirs_abc::platform_dirs_abc;
+unix(const std::optional<std::string>& appname = std::nullopt, const std::variant<std::string, std::nullopt_t, bool>& appauthor = std::nullopt, const std::optional<std::string>& version = std::nullopt, bool roaming = false, bool multipath = false, bool opinion = true, bool ensure_exists = false);
 
-virtual std::string user_data_dir() const;
+std::string user_data_dir() const override;
 
-virtual std::string site_data_dir() const;
+std::string site_data_dir() const override;
 
 // virtual std::string user_config_dir() const;
 

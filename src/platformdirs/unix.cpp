@@ -7,8 +7,11 @@
 #include <cstdlib>
 #include "utils.h"
 
-auto platformdirs::unix::unix::user_data_dir() const -> std::string {
-    auto path = std::string(std::getenv("XDG_DATA_HOME"));
+platformdirs::unix::unix::unix(const std::optional<std::string>& appname, const std::variant<std::string, std::nullopt_t, bool>& appauthor, const std::optional<std::string>& version, bool roaming, bool multipath, bool opinion, bool ensure_exists) : platformdirs::api::platform_dirs_abc(appname, appauthor, version, roaming, multipath, opinion, ensure_exists) { }
+
+std::string platformdirs::unix::unix::user_data_dir() const {
+    auto path_c_str = std::getenv("XDG_DATA_HOME");
+    auto path = path_c_str ? std::string(path_c_str) : std::string();
     platformdirs::utils::ltrim(path);
     platformdirs::utils::rtrim(path);
     if (path == "") {
@@ -18,7 +21,8 @@ auto platformdirs::unix::unix::user_data_dir() const -> std::string {
 }
 
 auto platformdirs::unix::unix::site_data_dirs() const -> std::vector<std::string> {
-    auto path = std::string(std::getenv("XDG_DATA_DIRS"));
+    auto path_c_str = std::getenv("XDG_DATA_DIRS");
+    auto path = path_c_str ? std::string(path_c_str) : std::string();
     platformdirs::utils::ltrim(path);
     platformdirs::utils::rtrim(path);
     if (path == "") {
@@ -31,7 +35,7 @@ auto platformdirs::unix::unix::site_data_dirs() const -> std::vector<std::string
     return appended;
 }
 
-auto platformdirs::unix::unix::site_data_dir() const -> std::string {
+std::string platformdirs::unix::unix::site_data_dir() const {
     auto const dirs = this->site_data_dirs();
     if (!this->multipath) {
         return dirs.at(0);

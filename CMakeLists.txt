@@ -17,7 +17,7 @@ set(FMT_OS OFF)
 FetchContent_MakeAvailable(fmt)
 
 add_library(platformdirs)
-target_sources(platformdirs PRIVATE src/platformdirs/api.cpp src/platformdirs/unix.cpp src/platformdirs/version.cpp)
+target_sources(platformdirs PRIVATE src/platformdirs/api.cpp src/platformdirs/unix.cpp src/platformdirs/utils.cpp src/platformdirs/version.cpp)
 target_include_directories(platformdirs PUBLIC include)
 target_compile_features(platformdirs PRIVATE cxx_std_23)
 # cosmocc has exceptions off by default

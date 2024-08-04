@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include <vector>
 
-platformdirs::api::platform_dirs_abc::platform_dirs_abc(const std::optional<std::string>& appname = std::nullopt, const std::variant<std::string, std::nullopt_t, bool>& appauthor = std::nullopt, const std::optional<std::string>& version = std::nullopt, bool roaming = false, bool multipath = false, bool opinion = true, bool ensure_exists = false) {
+platformdirs::api::platform_dirs_abc::platform_dirs_abc(const std::optional<std::string>& appname, const std::variant<std::string, std::nullopt_t, bool>& appauthor, const std::optional<std::string>& version, bool roaming, bool multipath, bool opinion, bool ensure_exists) {
     this->appname = appname;
     this->appauthor = appauthor;
     this->version = version;
@@ -20,13 +20,13 @@ platformdirs::api::platform_dirs_abc::platform_dirs_abc(const std::optional<std:
     this->ensure_exists = ensure_exists;
 }
 
-// std::filesystem::path platformdirs::api::platform_dirs_abc::user_data_path() const {
-//     return std::filesystem::path(this->user_data_dir());
-// }
+std::filesystem::path platformdirs::api::platform_dirs_abc::user_data_path() const {
+    return std::filesystem::path(this->user_data_dir());
+}
 
-// std::filesystem::path platformdirs::api::platform_dirs_abc::site_data_path() const {
-//     return std::filesystem::path(this->site_data_dir());
-// }
+std::filesystem::path platformdirs::api::platform_dirs_abc::site_data_path() const {
+    return std::filesystem::path(this->site_data_dir());
+}
 
 // std::filesystem::path platformdirs::api::platform_dirs_abc::user_config_path() const {
 //     return std::filesystem::path(this->user_config_dir());
@@ -92,12 +92,9 @@ auto platformdirs::api::platform_dirs_abc::append_app_name_and_version(const std
             params.push_back(this->version.value());
         }
     }
-    auto i = params.cbegin();
-    auto path = std::filesystem::path(*i);
-    i++;
-    while (i != params.cend()) {
-        path = path / *i;
-        i++;
+    auto path = std::filesystem::path(base.at(0));
+    for (auto p : params) {
+        path = path / p;
     }
     this->optionally_create_directory(path.string());
     return path.string();

@@ -41,6 +41,12 @@
       "binaryDir": "build/gcc"
     },
     {
+      "name": "zig-cc",
+      "inherits": ["default"],
+      "toolchainFile": "cmake/zig-cc.cmake",
+      "binaryDir": "build/zig-cc"
+    },
+    {
       "name": "zig-cc-target-arm64-linux-musl",
       "inherits": ["default"],
       "toolchainFile": "cmake/zig-cc-target-arm64-linux-musl.cmake",
@@ -94,6 +100,8 @@
       "configuration": "Debug"
     }
   ],
+  "testPresets": [],
+  "packagePresets": [],
   "workflowPresets": [
     {
       "name": "default",
