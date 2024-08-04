@@ -79,7 +79,7 @@ cmake --workflow --preset zig-cc-target-wasm32-wasi-musl
 cmake --workflow --preset zig-cc-target-* # There's more!
 ```
 
-<dt>Compile and run tests
+<dt><s>Compile and run tests</s> <i>No tests right now</i>
 <dd>
 
 ```sh
