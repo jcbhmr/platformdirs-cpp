@@ -1,4 +1,5 @@
 #pragma once
+#undef unix
 #include <filesystem>
 #include <string>
 #include <string_view>

@@ -23,10 +23,58 @@
       }
     },
     {
+      "name": "clang",
+      "inherits": ["default"],
+      "toolchainFile": "cmake/clang.cmake",
+      "binaryDir": "build/clang"
+    },
+    {
       "name": "cosmocc",
       "inherits": ["default"],
       "toolchainFile": "cmake/cosmocc.cmake",
       "binaryDir": "build/cosmocc"
+    },
+    {
+      "name": "gcc",
+      "inherits": ["default"],
+      "toolchainFile": "cmake/gcc.cmake",
+      "binaryDir": "build/gcc"
+    },
+    {
+      "name": "zig-cc-target-arm64-linux-musl",
+      "inherits": ["default"],
+      "toolchainFile": "cmake/zig-cc-target-arm64-linux-musl.cmake",
+      "binaryDir": "build/zig-cc-target-arm64-linux-musl"
+    },
+    {
+      "name": "zig-cc-target-arm64-macos-none",
+      "inherits": ["default"],
+      "toolchainFile": "cmake/zig-cc-target-arm64-macos-none.cmake",
+      "binaryDir": "build/zig-cc-target-arm64-macos-none"
+    },
+    {
+      "name": "zig-cc-target-wasm32-wasi-musl",
+      "inherits": ["default"],
+      "toolchainFile": "cmake/zig-cc-target-wasm32-wasi-musl.cmake",
+      "binaryDir": "build/zig-cc-target-wasm32-wasi-musl"
+    },
+    {
+      "name": "zig-cc-target-x86_64-linux-musl",
+      "inherits": ["default"],
+      "toolchainFile": "cmake/zig-cc-target-x86_64-linux-musl.cmake",
+      "binaryDir": "build/zig-cc-target-x86_64-linux-musl"
+    },
+    {
+      "name": "zig-cc-target-x86_64-macos-none",
+      "inherits": ["default"],
+      "toolchainFile": "cmake/zig-cc-target-x86_64-macos-none.cmake",
+      "binaryDir": "build/zig-cc-target-x86_64-macos-none"
+    },
+    {
+      "name": "zig-cc-target-x86_64-windows-gnu",
+      "inherits": ["default"],
+      "toolchainFile": "cmake/zig-cc-target-x86_64-windows-gnu.cmake",
+      "binaryDir": "build/zig-cc-target-x86_64-windows-gnu"
     }
   ],
   "buildPresets": [
