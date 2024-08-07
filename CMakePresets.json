@@ -48,37 +48,37 @@
     },
     {
       "name": "zig-cc-target-arm64-linux-musl",
-      "inherits": ["default"],
+      "inherits": ["zig-cc"],
       "toolchainFile": "cmake/zig-cc-target-arm64-linux-musl.cmake",
       "binaryDir": "build/zig-cc-target-arm64-linux-musl"
     },
     {
       "name": "zig-cc-target-arm64-macos-none",
-      "inherits": ["default"],
+      "inherits": ["zig-cc"],
       "toolchainFile": "cmake/zig-cc-target-arm64-macos-none.cmake",
       "binaryDir": "build/zig-cc-target-arm64-macos-none"
     },
     {
       "name": "zig-cc-target-wasm32-wasi-musl",
-      "inherits": ["default"],
+      "inherits": ["zig-cc"],
       "toolchainFile": "cmake/zig-cc-target-wasm32-wasi-musl.cmake",
       "binaryDir": "build/zig-cc-target-wasm32-wasi-musl"
     },
     {
       "name": "zig-cc-target-x86_64-linux-musl",
-      "inherits": ["default"],
+      "inherits": ["zig-cc"],
       "toolchainFile": "cmake/zig-cc-target-x86_64-linux-musl.cmake",
       "binaryDir": "build/zig-cc-target-x86_64-linux-musl"
     },
     {
       "name": "zig-cc-target-x86_64-macos-none",
-      "inherits": ["default"],
+      "inherits": ["zig-cc"],
       "toolchainFile": "cmake/zig-cc-target-x86_64-macos-none.cmake",
       "binaryDir": "build/zig-cc-target-x86_64-macos-none"
     },
     {
       "name": "zig-cc-target-x86_64-windows-gnu",
-      "inherits": ["default"],
+      "inherits": ["zig-cc"],
       "toolchainFile": "cmake/zig-cc-target-x86_64-windows-gnu.cmake",
       "binaryDir": "build/zig-cc-target-x86_64-windows-gnu"
     }
@@ -91,17 +91,105 @@
     },
     {
       "name": "release",
+      "inherits": ["default"],
       "configurePreset": "release",
       "configuration": "Release"
     },
     {
+      "name": "clang",
+      "inherits": ["default"],
+      "configurePreset": "clang"
+    },
+    {
       "name": "cosmocc",
-      "configurePreset": "cosmocc",
-      "configuration": "Debug"
+      "inherits": ["default"],
+      "configurePreset": "cosmocc"
+    },
+    {
+      "name": "gcc",
+      "inherits": ["default"],
+      "configurePreset": "gcc"
+    },
+    {
+      "name": "zig-cc",
+      "inherits": ["default"],
+      "configurePreset": "zig-cc"
+    },
+    {
+      "name": "zig-cc-target-arm64-linux-musl",
+      "inherits": ["zig-cc"],
+      "configurePreset": "zig-cc-target-arm64-linux-musl"
+    },
+    {
+      "name": "zig-cc-target-arm64-macos-none",
+      "inherits": ["zig-cc"],
+      "configurePreset": "zig-cc-target-arm64-macos-none"
+    },
+    {
+      "name": "zig-cc-target-wasm32-wasi-musl",
+      "inherits": ["zig-cc"],
+      "configurePreset": "zig-cc-target-wasm32-wasi-musl"
+    },
+    {
+      "name": "zig-cc-target-x86_64-linux-musl",
+      "inherits": ["zig-cc"],
+      "configurePreset": "zig-cc-target-x86_64-linux-musl"
+    },
+    {
+      "name": "zig-cc-target-x86_64-macos-none",
+      "inherits": ["zig-cc"],
+      "configurePreset": "zig-cc-target-x86_64-macos-none"
+    },
+    {
+      "name": "zig-cc-target-x86_64-windows-gnu",
+      "inherits": ["zig-cc"],
+      "configurePreset": "zig-cc-target-x86_64-windows-gnu"
+    },
+    {
+      "name": "format",
+      "inherits": ["default"],
+      "targets": ["format"]
+    },
+    {
+      "name": "lint",
+      "inherits": ["default"],
+      "targets": ["lint"]
+    },
+    {
+      "name": "docs",
+      "inherits": ["default"],
+      "targets": ["docs"]
+    },
+    {
+      "name": "preview",
+      "inherits": ["default"],
+      "targets": ["preview"]
     }
   ],
-  "testPresets": [],
-  "packagePresets": [],
+  "testPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default",
+      "configuration": "Debug",
+      "output": { "outputOnFailure": true }
+    },
+    {
+      "name": "cosmocc",
+      "inherits": ["default"],
+      "configurePreset": "cosmocc"
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "default",
+      "configurePreset": "default"
+    },
+    {
+      "name": "release",
+      "inherits": ["default"],
+      "configurePreset": "release"
+    }
+  ],
   "workflowPresets": [
     {
       "name": "default",
@@ -118,10 +206,117 @@
       ]
     },
     {
+      "name": "test",
+      "steps": [
+        { "type": "configure", "name": "default" },
+        { "type": "build", "name": "default" },
+        { "type": "test", "name": "default" }
+      ]
+    },
+    {
+      "name": "test-cosmocc",
+      "steps": [
+        { "type": "configure", "name": "cosmocc" },
+        { "type": "build", "name": "cosmocc" },
+        { "type": "test", "name": "cosmocc" }
+      ]
+    },
+    {
+      "name": "clang",
+      "steps": [
+        { "type": "configure", "name": "clang" },
+        { "type": "build", "name": "clang" }
+      ]
+    },
+    {
       "name": "cosmocc",
       "steps": [
         { "type": "configure", "name": "cosmocc" },
         { "type": "build", "name": "cosmocc" }
+      ]
+    },
+    {
+      "name": "gcc",
+      "steps": [
+        { "type": "configure", "name": "gcc" },
+        { "type": "build", "name": "gcc" }
+      ]
+    },
+    {
+      "name": "zig-cc",
+      "steps": [
+        { "type": "configure", "name": "zig-cc" },
+        { "type": "build", "name": "zig-cc" }
+      ]
+    },
+    {
+      "name": "zig-cc-target-arm64-linux-musl",
+      "steps": [
+        { "type": "configure", "name": "zig-cc-target-arm64-linux-musl" },
+        { "type": "build", "name": "zig-cc-target-arm64-linux-musl" }
+      ]
+    },
+    {
+      "name": "zig-cc-target-arm64-macos-none",
+      "steps": [
+        { "type": "configure", "name": "zig-cc-target-arm64-macos-none" },
+        { "type": "build", "name": "zig-cc-target-arm64-macos-none" }
+      ]
+    },
+    {
+      "name": "zig-cc-target-wasm32-wasi-musl",
+      "steps": [
+        { "type": "configure", "name": "zig-cc-target-wasm32-wasi-musl" },
+        { "type": "build", "name": "zig-cc-target-wasm32-wasi-musl" }
+      ]
+    },
+    {
+      "name": "zig-cc-target-x86_64-linux-musl",
+      "steps": [
+        { "type": "configure", "name": "zig-cc-target-x86_64-linux-musl" },
+        { "type": "build", "name": "zig-cc-target-x86_64-linux-musl" }
+      ]
+    },
+    {
+      "name": "zig-cc-target-x86_64-macos-none",
+      "steps": [
+        { "type": "configure", "name": "zig-cc-target-x86_64-macos-none" },
+        { "type": "build", "name": "zig-cc-target-x86_64-macos-none" }
+      ]
+    },
+    {
+      "name": "zig-cc-target-x86_64-windows-gnu",
+      "steps": [
+        { "type": "configure", "name": "zig-cc-target-x86_64-windows-gnu" },
+        { "type": "build", "name": "zig-cc-target-x86_64-windows-gnu" }
+      ]
+    },
+    {
+      "name": "format",
+      "steps": [
+        { "type": "configure", "name": "default" },
+        { "type": "build", "name": "format" }
+      ]
+    },
+    {
+      "name": "lint",
+      "steps": [
+        { "type": "configure", "name": "default" },
+        { "type": "build", "name": "lint" }
+      ]
+    },
+    {
+      "name": "docs",
+      "steps": [
+        { "type": "configure", "name": "default" },
+        { "type": "build", "name": "docs" }
+      ]
+    },
+    {
+      "name": "preview",
+      "steps": [
+        { "type": "configure", "name": "default" },
+        { "type": "build", "name": "preview" }
       ]
     }
   ]

@@ -1,7 +1,7 @@
 #pragma once
-#include <tuple>
-#include <string>
 #include <cstdint>
+#include <string>
+#include <tuple>
 
 namespace platformdirs {
 namespace version {

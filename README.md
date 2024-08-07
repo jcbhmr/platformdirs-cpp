@@ -16,19 +16,29 @@ TODO
 
 ## Installation
 
+<dl>
+<dt>CMake <code>find_package()</code> with <code>FetchContent</code> fallback
+<dd>
+
 ```cmake
 include(FetchContent)
 FetchContent_Declare(platformdirs
     GIT_REPOSITORY https://github.com/jcbhmr/platformdirs-cpp.git
     GIT_TAG v0.1.0
-)
+    FIND_PACKAGE_ARGS 0.1.0...<1)
+# Will try find_package(platformdirs 0.1.0...<1) first
 FetchContent_MakeAvailable(platformdirs)
-target_link_libraries(my-app platformdirs)
+
+# ...
+
+# Now link it into your app/lib target
+target_link_libraries(myapp platformdirs::platformdirs)
+target_link_libraries(mylib platformdirs::platformdirs)
 ```
 
-## Usage
+</dl>
 
-<table><td>
+## Usage
 
 <div><code>main.cpp</code></div>
 
@@ -37,72 +47,20 @@ target_link_libraries(my-app platformdirs)
 #include <platformdirs.h>
 
 int main() {
-    std::println("user config: {}", platformdirs::user_config_dir());
-    std::println("user cache (myapp by me): {}", platformdirs::user_cache_dir("myapp", "me"));
+    std::println("my app config: {}", platformdirs::user_config_dir("myapp", "me", "1.2.3"));
     return 0;
 }
 ```
 
-<tr><td>
-
-```
-user config: ~/.local/config
-user cache (myapp by me): ~/.local/cache/me/myapp TODO!
-```
-
-</table>
-
-~~[📚 See the complete API surface on the website](https://jcbhmr.me/platformdirs/)~~
+[📚 See the complete API surface on the website](https://jcbhmr.me/platformdirs/)
 
 💡 Pro tip: there's an included `platformdirs` executable which prints a report of all the config dirs for you. It's great for debugging! 😉
 
 ## Development
 
-<dl>
-<dt>Compile everything using the system C/C++ toolchain
-<dd>
-
 ```sh
 cmake --workflow --preset default
-cmake --workflow --preset release
+cmake --workflow --preset test
 ```
-
-<dt>Compile everything using a different C/C++ toolchain
-<dd>
-
-```sh
-cmake --workflow --preset clang
-cmake --workflow --preset cosmocc
-cmake --workflow --preset gcc
-cmake --workflow --preset zig-cc
-cmake --workflow --preset zig-cc-target-wasm32-wasi-musl
-cmake --workflow --preset zig-cc-target-* # There's more!
-```
-
-<dt><s>Compile and run tests</s> <i>No tests right now</i>
-<dd>
-
-```sh
-cmake --workflow --preset test # (system toolchain)
-cmake --workflow --preset test-cosmocc
-```
-
-<dt>Run tasks defined in <code>task.cmake</code>
-<dd>
-
-```sh
-cmake --workflow --preset format
-cmake --workflow --preset lint
-```
-
-<dt>Compile and package
-<dd>
-
-```sh
-cmake --workflow --preset package # (system toolchain)
-cmake --workflow --preset package-cosmocc
-```
-
-</dl>
 
 💡 You can cut down on the repetative `cmake --workflow --preset` with an `alias cmakew="cmake --workflow --preset"` or similar.

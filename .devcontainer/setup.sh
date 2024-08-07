@@ -69,3 +69,15 @@ if ! command -v zig; then
     curl -sS https://webi.sh/zig | sh
     source ~/.config/envman/PATH.env
 fi
+
+if ! command -v cmake-format; then
+    if ! command -v pipx; then
+        pip install pipx
+    fi
+    pipx install cmake-format
+fi
+
+if ! command -v doxygen; then
+    sudo apt-get update
+    sudo apt-get install -y doxygen
+fi
