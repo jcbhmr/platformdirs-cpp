@@ -1,7 +1,7 @@
 #include "windows.h"
 #include "utils.h"
 #include <filesystem>
-#include <fmt/format.h>
+#include <format>
 #include <optional>
 #include <string>
 #include <type_traits>
@@ -152,13 +152,13 @@ auto platformdirs::windows::get_win_folder_from_env_vars(
   } else if (csidl_name == "CSIDL_LOCAL_APPDATA") {
     env_var_name = "LOCALAPPDATA";
   } else {
-    throw std::runtime_error(fmt::format("Unknown CSIDL name: {}", csidl_name));
+    throw std::runtime_error(std::format("Unknown CSIDL name: {}", csidl_name));
   }
 
   auto result_c_str = std::getenv(env_var_name.c_str());
   if (!result_c_str) {
     throw std::runtime_error(
-        fmt::format("Unset environment variable: {}", env_var_name));
+        std::format("Unset environment variable: {}", env_var_name));
   }
   return std::string(result_c_str);
 }

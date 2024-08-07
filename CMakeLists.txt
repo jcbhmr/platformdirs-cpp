@@ -8,17 +8,6 @@ project(
   HOMEPAGE_URL "https://jcbhmr.me/platformdirs"
   LANGUAGES CXX)
 
-# Main dependencies
-include(FetchContent)
-FetchContent_Declare(
-  fmt
-  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-  GIT_TAG 11.0.2
-  FIND_PACKAGE_ARGS 11.0.2...<12)
-# FMT_OS doesn't work with Cosmopolitan
-set(FMT_OS OFF)
-FetchContent_MakeAvailable(fmt)
-
 # Library targets
 add_library(platformdirs)
 add_library(platformdirs::platformdirs ALIAS platformdirs)
@@ -35,7 +24,6 @@ target_include_directories(platformdirs PUBLIC include)
 target_compile_features(platformdirs PRIVATE cxx_std_23)
 # cosmocc has exceptions off by default
 target_compile_options(platformdirs PRIVATE -fexceptions)
-target_link_libraries(platformdirs PRIVATE fmt::fmt)
 target_compile_definitions(platformdirs PRIVATE
 PROJECT_VERSION="${PROJECT_VERSION}"
 PROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
@@ -51,7 +39,7 @@ target_sources(platformdirs_exe PRIVATE src/platformdirs_exe.cpp)
 target_compile_features(platformdirs_exe PRIVATE cxx_std_23)
 # cosmocc has exceptions off by default
 target_compile_options(platformdirs_exe PRIVATE -fexceptions)
-target_link_libraries(platformdirs_exe PRIVATE fmt::fmt platformdirs)
+target_link_libraries(platformdirs_exe PRIVATE platformdirs)
 target_compile_definitions(platformdirs_exe PRIVATE
 PROJECT_VERSION="${PROJECT_VERSION}"
 PROJECT_VERSION_MAJOR=${PROJECT_VERSION_MAJOR}
@@ -65,12 +53,18 @@ if(BUILD_TESTING)
   add_test(NAME platformdirs COMMAND platformdirs_exe)
 endif()
 
-# Packaging
-include(CPack)
-
 # Installation
 include(GNUInstallDirs)
-install(TARGETS platformdirs platformdirs_exe)
+install(TARGETS platformdirs_exe)
+
+# Packaging
+if(WIN32)
+  set(CPACK_GENERATOR ZIP)
+else()
+  set(CPACK_GENERATOR TGZ)
+endif()
+set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
+include(CPack)
 
 # Tasks
 if(BUILD_TESTING)

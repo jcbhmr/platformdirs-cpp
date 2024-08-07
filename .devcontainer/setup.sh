@@ -57,7 +57,12 @@ if ! command -v clang-format; then
 fi
 
 if ! command -v clang; then
-    sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+    sudo apt update
+    sudo apt install -y clang
+fi
+
+if ! command -v clang-19; then
+    sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" -- 19
 fi
 
 if ! command -v gcc; then

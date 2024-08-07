@@ -1,7 +1,7 @@
 #undef unix
 #include "platformdirs.h"
 #include <filesystem>
-#include <fmt/format.h>
+#include <format>
 #include <memory>
 #include <string>
 

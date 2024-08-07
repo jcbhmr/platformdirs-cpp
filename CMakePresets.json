@@ -29,6 +29,12 @@
       "binaryDir": "build/clang"
     },
     {
+      "name": "clang-19",
+      "inherits": ["clang"],
+      "toolchainFile": "cmake/clang-19.cmake",
+      "binaryDir": "build/clang-19"
+    },
+    {
       "name": "cosmocc",
       "inherits": ["default"],
       "toolchainFile": "cmake/cosmocc.cmake",
@@ -99,6 +105,11 @@
       "name": "clang",
       "inherits": ["default"],
       "configurePreset": "clang"
+    },
+    {
+      "name": "clang-19",
+      "inherits": ["clang"],
+      "configurePreset": "clang-19"
     },
     {
       "name": "cosmocc",
@@ -185,6 +196,21 @@
       "configurePreset": "default"
     },
     {
+      "name": "clang",
+      "inherits": ["default"],
+      "configurePreset": "clang"
+    },
+    {
+      "name": "clang-19",
+      "inherits": ["clang"],
+      "configurePreset": "clang-19"
+    },
+    {
+      "name": "zig-cc",
+      "inherits": ["default"],
+      "configurePreset": "zig-cc"
+    },
+    {
       "name": "release",
       "inherits": ["default"],
       "configurePreset": "release"
@@ -222,10 +248,49 @@
       ]
     },
     {
+      "name": "package",
+      "steps": [
+        { "type": "configure", "name": "default" },
+        { "type": "build", "name": "default" },
+        { "type": "package", "name": "default" }
+      ]
+    },
+    {
+      "name": "package-clang",
+      "steps": [
+        { "type": "configure", "name": "clang" },
+        { "type": "build", "name": "clang" },
+        { "type": "package", "name": "clang" }
+      ]
+    },
+    {
+      "name": "package-clang-19",
+      "steps": [
+        { "type": "configure", "name": "clang-19" },
+        { "type": "build", "name": "clang-19" },
+        { "type": "package", "name": "clang-19" }
+      ]
+    },
+    {
+      "name": "package-zig-cc",
+      "steps": [
+        { "type": "configure", "name": "zig-cc" },
+        { "type": "build", "name": "zig-cc" },
+        { "type": "package", "name": "zig-cc" }
+      ]
+    },
+    {
       "name": "clang",
       "steps": [
         { "type": "configure", "name": "clang" },
         { "type": "build", "name": "clang" }
+      ]
+    },
+    {
+      "name": "clang-19",
+      "steps": [
+        { "type": "configure", "name": "clang-19" },
+        { "type": "build", "name": "clang-19" }
       ]
     },
     {

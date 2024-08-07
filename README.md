@@ -4,7 +4,24 @@
 
 <table align=center><td>
 
-TODO
+```cpp
+auto dirs = platformdirs::platform_dirs(app_name, app_author, "1.0");
+std::println("user_data_dir: {}", dirs.user_data_dir());
+std::println("user_config_dir: {}", dirs.user_config_dir());
+std::println("user_cache_dir: {}", dirs.user_cache_dir());
+std::println("user_state_dir: {}", dirs.user_state_dir());
+std::println("user_log_dir: {}", dirs.user_log_dir());
+std::println("...and more!");
+```
+
+```
+user_data_dir: ~/.local/share/MyApp/1.0
+user_config_dir: ~/.config/MyApp/1.0
+user_cache_dir: ~/.cache/MyApp/1.0
+user_state_dir: ~/.local/state/MyApp/1.0
+user_log_dir: ~/.local/state/MyApp/1.0/log
+...and more!
+```
 
 </table>
 
@@ -12,9 +29,11 @@ TODO
 🔺 Works great with CMake \
 💅 Uses platformdirs' opinionated directories \
 📂 Works on Windows \
-🌌 Works with [Cosmopolitan Libc](https://github.com/jart/cosmopolitan)!
+🌌 Works with [cosmocc](https://github.com/jart/cosmopolitan/tree/master/tool/cosmocc)!
 
 ## Installation
+
+![CMake](https://img.shields.io/static/v1?style=for-the-badge&message=CMake&color=064F8C&logo=CMake&logoColor=FFFFFF&label=)
 
 <dl>
 <dt>CMake <code>find_package()</code> with <code>FetchContent</code> fallback
@@ -40,6 +59,8 @@ target_link_libraries(mylib platformdirs::platformdirs)
 
 ## Usage
 
+![C++](https://img.shields.io/static/v1?style=for-the-badge&message=C%2B%2B&color=00599C&logo=C%2B%2B&logoColor=FFFFFF&label=)
+
 <div><code>main.cpp</code></div>
 
 ```cpp
@@ -57,6 +78,8 @@ int main() {
 💡 Pro tip: there's an included `platformdirs` executable which prints a report of all the config dirs for you. It's great for debugging! 😉
 
 ## Development
+
+![CMake](https://img.shields.io/static/v1?style=for-the-badge&message=CMake&color=064F8C&logo=CMake&logoColor=FFFFFF&label=)
 
 ```sh
 cmake --workflow --preset default
