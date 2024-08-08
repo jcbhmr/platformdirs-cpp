@@ -107,17 +107,36 @@ if(BUILD_TESTING AND CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
     src/*.cmake
     test/*CMakeLists.txt
     test/*.cmake)
-  list(APPEND cmake_format_files CMakeLists.txt task.cmake)
-  add_custom_target(format 
-  COMMAND clang-format -i ${c_cxx_files}
-  COMMAND cmake-format -i ${cmake_files}
-  COMMAND_ECHO STDERR
-  COMMAND_ERROR_IS_FATAL ANY
-  WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
-  
-  file(GLOB_RECURSE all_files .github/* cmake/* src/* examples/* test/* docs/*)
-  list(APPEND .gitignore CMakeLists.txt CMakePresets.json README.md task.cmake)
-  add_custom_target(lint COMMAND codespell -w ${all_files} WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
+  list(APPEND cmake_files CMakeLists.txt)
+  add_custom_target(
+    format
+    COMMAND clang-format -i ${c_cxx_files}
+    COMMAND cmake-format -i ${cmake_files}
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    USES_TERMINAL)
+
+  file(
+    GLOB_RECURSE
+    all_files
+    .github/*
+    cmake/*
+    src/*
+    examples/*
+    test/*
+    docs/*)
+  list(
+    APPEND
+    all_files
+    .gitignore
+    CMakeLists.txt
+    CMakePresets.json
+    README.md
+    task.cmake)
+  add_custom_target(
+    lint
+    COMMAND codespell -w ${all_files}
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    USES_TERMINAL)
   
   find_package(Doxygen)
   if(Doxygen_FOUND)
@@ -126,7 +145,7 @@ if(BUILD_TESTING AND CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
     set(DOXYGEN_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/include")
     doxygen_add_docs(docs "${PROJECT_SOURCE_DIR}")
 
-    add_custom_target(preview COMMAND python -m http.server WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html")
+    add_custom_target(preview COMMAND python -m http.server WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html" USES_TERMINAL)
     add_dependencies(preview docs)
   endif()
 endif()
