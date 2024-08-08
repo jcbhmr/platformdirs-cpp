@@ -85,5 +85,3 @@ int main() {
 cmake --workflow --preset default
 cmake --workflow --preset test
 ```
-
-💡 You can cut down on the repetative `cmake --workflow --preset` with an `alias cmakew="cmake --workflow --preset"` or similar.
