@@ -1,4 +1,4 @@
-name: deploy-pages
+name: cmake-workflow-preset-docs
 on:
   push:
     branches: ["main"]
@@ -25,7 +25,7 @@ jobs:
         with:
           path: build/html
   deploy-pages:
-    needs: build
+    needs: cmake-workflow-preset-docs
     permissions:
       pages: write
       id-token: write
