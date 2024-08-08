@@ -54,8 +54,8 @@ fi
 
 if ! command -v clang-format; then
     cd ~/.local/bin
-    sudo wget https://cosmo.zip/pub/cosmos/bin/clang-format
-    sudo chmod +x clang-format
+    wget https://cosmo.zip/pub/cosmos/bin/clang-format
+    chmod +x clang-format
     echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.bashrc
     export PATH="$PATH:$HOME/.local/bin"
     source ~/.bashrc
