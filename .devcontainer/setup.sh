@@ -47,6 +47,11 @@ if ! command -v cosmocc; then
     fi
 fi
 
+if ! command -v zig; then
+    curl -sS https://webi.sh/zig | sh
+    source ~/.config/envman/PATH.env
+fi
+
 if ! command -v clang-format; then
     cd ~/.local/bin
     sudo wget https://cosmo.zip/pub/cosmos/bin/clang-format
@@ -54,25 +59,6 @@ if ! command -v clang-format; then
     echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.bashrc
     export PATH="$PATH:$HOME/.local/bin"
     source ~/.bashrc
-fi
-
-if ! command -v clang; then
-    sudo apt update
-    sudo apt install -y clang
-fi
-
-if ! command -v clang-19; then
-    sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" -- 19
-fi
-
-if ! command -v gcc; then
-    sudo apt update
-    sudo apt install -y build-essential
-fi
-
-if ! command -v zig; then
-    curl -sS https://webi.sh/zig | sh
-    source ~/.config/envman/PATH.env
 fi
 
 if ! command -v cmake-format; then

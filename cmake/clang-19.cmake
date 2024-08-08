@@ -1,5 +1,0 @@
-set(CMAKE_ASM_COMPILER clang-19)
-set(CMAKE_C_COMPILER clang-19)
-set(CMAKE_CXX_COMPILER clang++-19)
-find_program(CMAKE_AR llvm-ar-19 REQUIRED)
-find_program(CMAKE_RANLIB llvm-ranlib-19 REQUIRED)

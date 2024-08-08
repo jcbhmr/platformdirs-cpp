@@ -68,7 +68,7 @@ include(CPack)
 
 # Tasks
 if(BUILD_TESTING)
-file(
+  file(
     GLOB_RECURSE
     c_cxx_files
     src/*.c
