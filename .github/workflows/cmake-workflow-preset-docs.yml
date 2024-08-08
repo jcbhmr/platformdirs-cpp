@@ -1,4 +1,4 @@
-name: cmake-workflow-preset-docs
+name: cmake --workflow --preset docs
 on:
   push:
     branches: ["main"]
