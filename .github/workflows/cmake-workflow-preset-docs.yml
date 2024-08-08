@@ -19,6 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: jwlawson/actions-setup-cmake@v2
       - uses: goto-bus-stop/setup-zig@v2
+      - uses: ssciwr/doxygen-install@v1
       - uses: actions/configure-pages@v5
       - run: cmake --workflow --preset docs
       - uses: actions/upload-pages-artifact@v3
