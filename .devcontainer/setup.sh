@@ -62,10 +62,7 @@ if ! command -v clang-format; then
 fi
 
 if ! command -v cmake-format; then
-    if ! command -v pipx; then
-        pip install pipx
-    fi
-    pipx install cmake-format
+    pip install cmake-format
 fi
 
 if ! command -v doxygen; then
