@@ -63,7 +63,6 @@ if(WIN32)
 else()
   set(CPACK_GENERATOR TGZ)
 endif()
-set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
 include(CPack)
 
 # Tasks
