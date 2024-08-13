@@ -28,7 +28,7 @@ user_log_dir: ~/.local/state/MyApp/1.0/log
 🐍 Same API surface as [platformdirs](https://pypi.org/project/platformdirs/) \
 🔺 Works great with CMake \
 💅 Uses platformdirs' opinionated directories \
-📂 Works on Windows \
+**🟦 Works on Windows** \
 🌌 Works with [cosmocc](https://github.com/jart/cosmopolitan/tree/master/tool/cosmocc)!
 
 ## Installation
