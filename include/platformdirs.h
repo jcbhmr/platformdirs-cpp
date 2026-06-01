@@ -27,9 +27,9 @@
 namespace platformdirs {
 
 /** Renamed slightly because there's a module name (namespace) and function name with the same "version" identifier. */
-constexpr auto &version_ = platformdirs::version::version;
+constexpr auto version_ = platformdirs::version::version;
 
-constexpr auto &version_info = platformdirs::version::version_tuple;
+constexpr auto version_info = platformdirs::version::version_tuple;
 
 #if __COSMOPOLITAN__
 /**
